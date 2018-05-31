@@ -32,11 +32,6 @@ inputs:
     type: string
     inputBinding:
       position: 3
-  output_dir:
-    type: string?
-    inputBinding:
-      position: 4
-      prefix: --output_dir
   threads:
     type: int?
     inputBinding:
