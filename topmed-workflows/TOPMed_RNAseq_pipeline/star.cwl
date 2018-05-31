@@ -1,7 +1,7 @@
 doc: |
     A wrapper for [run_STAR.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_STAR.py)
     
-    CWL implementation to run the Star aligner.
+    CWL implementation to run the STAR aligner. This is step 1 of the TOPMed RNA-seq workflow.
 
 cwlVersion: v1.0
 class: CommandLineTool
@@ -9,83 +9,85 @@ id: "run-star"
 label: "run-star"
 baseCommand: /src/run_STAR.py
 
-dct:creator:
-  "@id": "https://orcid.org/0000-0003-3523-5312"
-  foaf:name: Christopher Ball
-  foaf:mbox: "mailto:christopherball@rti.org"
-
 requirements:
-  - class: DockerRequirement
-    dockerPull: "#docker_image"
+  DockerRequirement:
+    dockerPull: heliumdatacommons/topmed-rnaseq:latest
 
 inputs:
   star_index:
-    type: File
+    type: Directory
+    default:
+      type: Directory
     inputBinding:
       position: 1
-  fastq1:
-    type: File
+  fastqs:
+    type:
+      type: array
+      items: File
+      inputBinding:
+        itemSeparator: ","
     inputBinding:
       position: 2
-  fastq2:
-    type: File
-    inputBinding:
-      position: 3
   prefix_str:
     type: string
     inputBinding:
-      position: 4
+      position: 3
   output_dir:
-    type: string
+    type: string?
     inputBinding:
-      position: 5
+      position: 4
       prefix: --output_dir
   threads:
-    type: int
+    type: int?
     inputBinding:
-      position: 6
+      position: 5
       prefix: --threads
 
 outputs:
   bam_file:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Aligned.sortedByCoord.out.bam"
+      glob: "*.Aligned.sortedByCoord.out.bam"
   bam_index:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Aligned.sortedByCoord.out.bam.bai"
+      glob: "*.Aligned.sortedByCoord.out.bam.bai"
   transcriptome_bam:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Aligned.toTranscriptome.out.bam"
+      glob: "*.Aligned.toTranscriptome.out.bam"
   chimeric_junctions:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Chimeric.out.junction"
+      glob: "*.Chimeric.out.junction"
   chimeric_bam_file:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Chimeric.out.sorted.bam"
+      glob: "*.Chimeric.out.sorted.bam"
   chimeric_bam_index:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.Chimeric.out.sorted.bam.bai"
+      glob: "*.Chimeric.out.sorted.bam.bai"
   read_counts:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.ReadsPerGene.out.tab"
+      glob: "*.ReadsPerGene.out.tab"
   junctions:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.SJ.out.tab"
+      glob: "*.SJ.out.tab"
   junctions_pass1:
     type: File
     outputBinding:
-      glob: "#output_dir/#prefix_str._STARpass1/SJ.out.tab"
+      glob: "*._STARpass1/SJ.out.tab"
   logs:
     type:
       type: array
       items: File
     outputBinding:
-      glob: "#output_dir/#prefix_str.*.out"
+      glob: "*.*.out"
+
+dct:creator:
+  "@id": "https://orcid.org/0000-0003-3523-5312"
+  foaf:name: Christopher Ball
+  foaf:mbox: "mailto:christopherball@rti.org"
