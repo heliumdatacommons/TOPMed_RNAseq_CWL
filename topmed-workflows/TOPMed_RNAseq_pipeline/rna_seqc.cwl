@@ -42,7 +42,7 @@ inputs:
       position: 5
       prefix: --java
   memory:
-    type: string
+    type: int
     inputBinding:
       position: 6
       prefix: --memory

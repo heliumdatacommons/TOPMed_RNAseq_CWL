@@ -12,6 +12,6 @@ genome_fasta: {
 }
 prefix_str: "LC_C13_cRNA"
 java_path: /usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/java
-memory: "8"
+memory: 8
 rnaseqc_flags: ["noDoC", "strictMode"]
 gatk_flags: []
