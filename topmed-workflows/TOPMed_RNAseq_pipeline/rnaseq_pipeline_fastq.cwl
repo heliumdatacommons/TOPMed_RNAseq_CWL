@@ -1,6 +1,15 @@
 doc: |
     TOPMed RNA-seq CWL workflow.
 
+    Pipeline steps:
+    1. Align RNA-seq reads with [STAR v2.5.3a](https://github.com/alexdobin/STAR).
+    2. Run [Picard](https://github.com/broadinstitute/picard) [MarkDuplicates](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates).
+    2a. Create BAM index for MarkDuplicates BAM with [Samtools 1.6](https://github.com/samtools/samtools/releases) index.
+    3. Transcript quantification with [RSEM 1.3.0](https://deweylab.github.io/RSEM/)
+    4. Gene quantification and quality control with [RNA-SeQC 1.1.9](https://github.com/francois-a/rnaseqc)
+
+    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
+
 cwlVersion: v1.0
 class: Workflow
 id: "TOPMed_RNA-seq"
@@ -90,21 +99,21 @@ outputs:
   - id: rsem_output_isoforms_results
     outputSource: run_rsem/isoforms_results
     type: File
-#   - id: rna-seqc_output_gene_rpkm
-#     outputSource: run_rna-seqc/gene_rpkm
-#     type: File
-#   - id: rna-seqc_output_gene_counts
-#     outputSource: run_rna-seqc/gene_counts
-#     type: File
-#   - id: rna-seqc_output_exon_counts
-#     outputSource: run_rna-seqc/exon_counts
-#     type: File
-#   - id: rna-seqc_output_count_metrics
-#     outputSource: run_rna-seqc/count_metrics
-#     type: File
-#   - id: rna-seqc_output_count_outputs
-#     outputSource: run_rna-seqc/count_outputs
-#     type: File
+  - id: rna-seqc_output_gene_rpkm
+    outputSource: run_rna-seqc/gene_rpkm
+    type: File
+  - id: rna-seqc_output_gene_counts
+    outputSource: run_rna-seqc/gene_counts
+    type: File
+  - id: rna-seqc_output_exon_counts
+    outputSource: run_rna-seqc/exon_counts
+    type: File
+  - id: rna-seqc_output_count_metrics
+    outputSource: run_rna-seqc/count_metrics
+    type: File
+  - id: rna-seqc_output_count_outputs
+    outputSource: run_rna-seqc/count_outputs
+    type: File
 
 steps:
   run_star:
@@ -163,27 +172,25 @@ steps:
         isoforms_results
       ]
 
-#   run_rna-seqc:
-#     run: rna_seqc.cwl
-#     in:
-#       bam_file: run_markduplicates/input_bam
-#         # - secondaryFiles:
-#         #    - run_index_markduplicates_bam/bam_index
-#       genes_gtf: genes_gtf
-#       genome_fasta: genome_fasta
-#       prefix_str: prefix_str
-#       java_path: java_path
-#       memory: memory
-#       rnaseqc_flags: rnaseqc_flags
-#       gatk_flags: gatk_flags
-#     out:
-#       [
-#         gene_rpkm,
-#         gene_counts,
-#         exon_counts,
-#         count_metrics,
-#         count_outputs
-#       ]
+  run_rna-seqc:
+    run: rna_seqc.cwl
+    in:
+      bam_file: run_index_markduplicates_bam/bam_index
+      genes_gtf: genes_gtf
+      genome_fasta: genome_fasta
+      prefix_str: prefix_str
+      java_path: java_path
+      memory: memory
+      rnaseqc_flags: rnaseqc_flags
+      gatk_flags: gatk_flags
+    out:
+      [
+        gene_rpkm,
+        gene_counts,
+        exon_counts,
+        count_metrics,
+        count_outputs
+      ]
 
 
 dct:creator:
