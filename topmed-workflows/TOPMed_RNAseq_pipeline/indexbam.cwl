@@ -1,5 +1,5 @@
 doc: |
-    A wrapper for running samtools index <bam>.
+    A wrapper for running `samtools index <bam>`.
 
 cwlVersion: v1.0
 class: CommandLineTool
@@ -8,11 +8,12 @@ label: "run-index-bam"
 baseCommand: ["samtools", "index"]
 
 requirements:
-  DockerRequirement:
-    dockerPull: heliumdatacommons/topmed-rnaseq:latest
-  InitialWorkDirRequirement:
-    listing:
-      - $(inputs.input_bam)
+- class: InlineJavascriptRequirement
+- class: DockerRequirement
+  dockerPull: heliumdatacommons/topmed-rnaseq:latest
+- class: InitialWorkDirRequirement
+  listing:
+    - $(inputs.input_bam)
 
 inputs:
   input_bam:
@@ -24,7 +25,9 @@ outputs:
   bam_index:
     type: File
     outputBinding:
-      glob: "*.bai"
+      glob: $(inputs.input_bam.basename)
+    secondaryFiles:
+      - .bai
 
 dct:creator:
   "@id": "https://orcid.org/0000-0003-3523-5312"
