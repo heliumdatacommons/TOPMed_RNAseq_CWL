@@ -1,7 +1,9 @@
 doc: |
-    A wrapper for [run_RSEM.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_RSEM.py)
-    
-    CWL implementation to run RSEM. This is step 3 of the TOPMed RNA-seq workflow.
+    A CWL wrapper for [run_RSEM.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_RSEM.py)
+
+    Runs [RSEM 1.3.0](https://deweylab.github.io/RSEM/)
+
+    This CWL Tool was developed as step 3 of the TOPMed RNA-seq workflow.
 
 cwlVersion: v1.0
 class: CommandLineTool

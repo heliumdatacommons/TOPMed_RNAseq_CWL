@@ -1,7 +1,11 @@
 doc: |
-    A wrapper for [run_STAR.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_STAR.py)
-    
-    CWL implementation to run the STAR aligner. This is step 1 of the TOPMed RNA-seq workflow.
+    A CWL wrapper for [run_STAR.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_STAR.py)
+
+    Runs [STAR v2.5.3a](https://github.com/alexdobin/STAR)
+
+    This CWL Tool was developed as step 1 of the TOPMed RNA-seq workflow.
+
+    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
 
 cwlVersion: v1.0
 class: CommandLineTool

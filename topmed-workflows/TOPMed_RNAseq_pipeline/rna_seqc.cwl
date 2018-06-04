@@ -1,7 +1,11 @@
 doc: |
-    A wrapper for [run_rnaseqc.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_rnaseqc.py)
-    
-    CWL implementation to run RNA-SeQC. This is step 4 of the TOPMed RNA-seq workflow.
+    A CWL wrapper for [run_rnaseqc.py](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/src/run_rnaseqc.py) duplicated from [run_rnaseqc.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_rnaseqc.py) with minor modifications.
+
+    Runs [RNA-SeQC 1.1.9](https://github.com/francois-a/rnaseqc)
+
+    This CWL Tool was developed as step 4 of the TOPMed RNA-seq workflow.
+
+    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
 
 cwlVersion: v1.0
 class: CommandLineTool

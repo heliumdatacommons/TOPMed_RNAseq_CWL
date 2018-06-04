@@ -1,7 +1,11 @@
 doc: |
-    A wrapper for [run_MarkDuplicates.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_MarkDuplicates.py)
+    A CWL wrapper for [run_MarkDuplicates.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_MarkDuplicates.py)
 
-    CWL implementation to run run_MarkDuplicates.py. This is step 2 of the TOPMed RNA-seq workflow.
+    Runs [Picard](https://github.com/broadinstitute/picard) [MarkDuplicates](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates)
+
+    This CWL Tool was developed as step 2 of the TOPMed RNA-seq workflow.
+
+    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
 
 cwlVersion: v1.0
 class: CommandLineTool
