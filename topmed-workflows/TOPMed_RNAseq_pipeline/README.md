@@ -4,10 +4,6 @@ This document describes team Helium's implimentation of the TOPMed RNA-seq pipel
 
 The scripts and settings used for the TOPMed MESA RNA-seq pilot match commit [725a2bc](https://github.com/broadinstitute/gtex-pipeline/tree/725a2bc74f9654244065256df91b44e8f5b7e62a), packaged [here](https://github.com/broadinstitute/gtex-pipeline/releases/tag/TOPMed_MESA_RNAseq_pilot).
 
-## Current status
-* Testing with `star.cwl`. Available in Dockstore [here](https://dockstore.org/containers/registry.hub.docker.com/heliumdatacommons/topmed-rnaseq/run-star)
-* Will test additional steps next.
-
 ## Docker Image
 
 Currently, republishing the GTEx pipeline Docker container on Docker Hub. 
