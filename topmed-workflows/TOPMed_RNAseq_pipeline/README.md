@@ -17,6 +17,9 @@ Local: [Dockerfile](topmed-workflows/TOPMed_RNAseq_pipeline/Docker/Dockerfile)
 3. RSEM ([run_RSEM.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_RSEM.py))
 4. RNA-SeQC ([run_rnaseqc.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_rnaseqc.py))
 
+## Create sample inputs
+See instructions [here](topmed-workflows/TOPMed_RNAseq_pipeline/checker-workflows#creating-downsampled-inputs)
+
 ## Running in Helium Datacommons
 * Register files into iRODS
     * [STAR index](https://personal.broadinstitute.org/francois/topmed/STAR_genome_GRCh38_noALT_noHLA_noDecoy_ERCC_v26_oh100.tar.gz)
