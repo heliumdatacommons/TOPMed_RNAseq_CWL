@@ -303,3 +303,19 @@ steps:
   #     file_to_check: run_rnaseq_pipeline/rna-seqc_output_count_outputs
   #     input_hash: hash_count_outputs
   #   out: [out_hash_string]
+
+$namespaces:
+  s: https://schema.org/
+
+$schemas:
+- http://dublincore.org/2012/06/14/dcterms.rdf
+- http://xmlns.com/foaf/spec/20140114.rdf
+- https://schema.org/docs/schema_org_rdfa.html
+
+s:author:
+  - class: s:Person
+    s:id: https://orcid.org/0000-0003-3523-5312
+    s:email: christopherball@rti.org
+    s:name: Christopher Ball
+
+s:codeRepository: https://github.com/heliumdatacommons/cwl_workflows
