@@ -191,9 +191,3 @@ steps:
         count_metrics,
         count_outputs
       ]
-
-
-dct:creator:
-  "@id": "https://orcid.org/0000-0003-3523-5312"
-  foaf:name: Christopher Ball
-  foaf:mbox: "mailto:christopherball@rti.org"
