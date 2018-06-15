@@ -37,8 +37,7 @@ A checker workflow for the TOPMed RNA-seq pipeline is published on Dockstore [he
 ## Sample data sets
 
 The sample data sets intended to be used as input are available through this [BioProject](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA173917).
-
-    * Direct [DataSets link](https://www.ncbi.nlm.nih.gov/bioproject?Db=biosample&DbFrom=bioproject&Cmd=Link&LinkName=bioproject_biosample&LinkReadableName=BioSample&ordinalpos=1&IdsFromResult=173917).
+* Direct [DataSets link](https://www.ncbi.nlm.nih.gov/bioproject?Db=biosample&DbFrom=bioproject&Cmd=Link&LinkName=bioproject_biosample&LinkReadableName=BioSample&ordinalpos=1&IdsFromResult=173917).
 
 Creating downsampled datasets for testing is described [here](topmed-workflows/TOPMed_RNAseq_pipeline/Downsampled_test_data.md).
 
