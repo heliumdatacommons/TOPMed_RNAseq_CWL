@@ -1,5 +1,10 @@
 doc: |
-    TOPMed RNA-seq CWL workflow.
+    TOPMed RNA-seq CWL workflow. Documentation on the workflow can be found [here](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/README.md).
+    Example input files: [Dockstore.json](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) and [rnaseq_pipeline_fastq-example.yml](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/rnaseq_pipeline_fastq-example.yml).
+
+    Quickstart instructions are [here](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/README.md#Quick Start).
+
+    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
 
     Pipeline steps:
     1. Align RNA-seq reads with [STAR v2.5.3a](https://github.com/alexdobin/STAR).
@@ -7,8 +12,6 @@ doc: |
     2a. Create BAM index for MarkDuplicates BAM with [Samtools 1.6](https://github.com/samtools/samtools/releases) index.
     3. Transcript quantification with [RSEM 1.3.0](https://deweylab.github.io/RSEM/)
     4. Gene quantification and quality control with [RNA-SeQC 1.1.9](https://github.com/francois-a/rnaseqc)
-
-    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
 
 cwlVersion: v1.0
 class: Workflow
