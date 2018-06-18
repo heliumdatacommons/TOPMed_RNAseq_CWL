@@ -14,14 +14,14 @@ The intended audiance is any scientist familiar with RNA-seq analysis wishing to
 
 Run the pipeline locally with small test input files. Creating these sample input files is described [here](topmed-workflows/TOPMed_RNAseq_pipeline/Downsampled_test_data.md).
 
-1. Dockstore CLI, CWLTool, Git, and Docker should be installed.
-2. Download and decompress sample files.
-    ```
-    ./topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/download_examples.sh
-    ```
-3. Clone this GitHub repository:
+1. Dockstore CLI, CWLTool, Git, [Git LFS](https://git-lfs.github.com/) and Docker should be installed.
+2. Clone this GitHub repository:
     ```
     git clone https://github.com/heliumdatacommons/cwl_workflows.git
+    ```
+3. Decompress sample files.
+    ```
+    ./topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/download_examples.sh
     ```
 4. Use [this](topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) input file or edit the file paths based on your local machine paths. If using the file directly, execute the workflow command in directory with the downloaded files.
 5. Run the workflow with CWLTool.
@@ -59,7 +59,7 @@ Creating downsampled datasets for testing is described [here](topmed-workflows/T
         * Will need to create BAM index file with Samtools index, [CWL File](topmed-workflows/TOPMed_RNAseq_pipeline/indexbam.cwl), example [input](topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/indexbam-example.yml)
 * Transcript quantification: [RNA-SeQC 1.1.9](https://github.com/francois-a/rnaseqc)
     * RNA-SeQC [CWL File](topmed-workflows/TOPMed_RNAseq_pipeline/rna_seqc.cwl)
-    * Python script ran by CWL file in Docker container: [run_rnaseqc.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_rnaseqc.py)
+    * Python script ran by CWL file in Docker container: [run_rnaseqc.py](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/src/run_rnaseqc.py)
     * INPUT: Genome FASTA, GTF file, Aligned BAM file from STAR. See example [input](topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/rna_seqc-example.yml)
     * OUTPUT:
         * Transcript-level expression quantifications, provided as TPM, expected read counts, and isoform percentages.

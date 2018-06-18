@@ -1,6 +1,8 @@
 doc: |
     A workflow to verify the proper execution of [TOPMed RNA-seq Workflow](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/rnaseq_pipeline_fastq.cwl)
 
+    Expects the STAR Index and RSEM reference directories to be `tar.gz` files.
+
 cwlVersion: v1.0
 class: Workflow
 id: "RNAseq-checker"
@@ -12,8 +14,8 @@ requirements:
   - class: SubworkflowFeatureRequirement
 
 inputs:
-  star_index:
-    type: Directory
+  star_index_tar:
+    type: File
   fastqs:
     type: File[]
   prefix_str:
@@ -22,8 +24,8 @@ inputs:
     type: int
   memory:
     type: int
-  rsem_ref_dir:
-    type: Directory
+  rsem_ref_dir_tar:
+    type: File
   max_frag_len:
     type: int
   estimate_rspd:
@@ -134,15 +136,27 @@ outputs:
   #   outputSource: check_count_outputs/out_hash_string
 
 steps:
+  untar_star_index:
+    run: components/untar_dir.cwl
+    in:
+      input_tar: star_index_tar
+    out: [untarred_dir]
+
+  untar_rsem_reference:
+    run: components/untar_dir.cwl
+    in:
+      input_tar: rsem_ref_dir_tar
+    out: [untarred_dir]
+
   run_rnaseq_pipeline:
     run: ../rnaseq_pipeline_fastq.cwl
     in:
-      star_index: star_index
+      star_index: untar_star_index/untarred_dir
       fastqs: fastqs
       prefix_str: prefix_str
       threads: threads
       memory: memory
-      rsem_ref_dir: rsem_ref_dir
+      rsem_ref_dir: untar_rsem_reference/untarred_dir
       max_frag_len: max_frag_len
       estimate_rspd: estimate_rspd
       is_stranded: is_stranded
