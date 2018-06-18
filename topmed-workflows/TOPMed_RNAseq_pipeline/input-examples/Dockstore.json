@@ -1,22 +1,22 @@
 {
   "memory": 8,
   "star_index": {
-    "path": "star_chr12",
+    "path": "../test-data/star_chr12",
     "class": "Directory"
   },
   "java_path": "/usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/java",
   "fastqs": [
     {
-      "path": "LC_C13_cRNA_sequence_R1_sub.fastq",
+      "path": "../test-data/sample/LC_C13_cRNA_sequence_R1_sub.fastq.gz",
       "class": "File"
     },
     {
-      "path": "LC_C13_cRNA_sequence_R2_sub.fastq",
+      "path": "../test-data/sample/LC_C13_cRNA_sequence_R2_sub.fastq.gz",
       "class": "File"
     }
   ],
   "rsem_ref_dir": {
-    "path": "rsem_reference",
+    "path": "../test-data/rsem_reference",
     "class": "Directory"
   },
   "prefix_str": "LC_C13_cRNA",
@@ -25,7 +25,7 @@
   "paired_end": "true",
   "gatk_flags": [],
   "genome_fasta": {
-    "path": "chr12.fa",
+    "path": "../test-data/reference-files/chr12.fa",
     "class": "File"
   },
   "max_frag_len": 1000,
@@ -35,7 +35,7 @@
   ],
   "estimate_rspd": "true",
   "genes_gtf": {
-    "path": "gencode.v26.annotation.chr12.withTranscriptID.gtf",
+    "path": "../test-data/reference-files/gencode.v26.annotation.chr12.withTranscriptID.gtf",
     "class": "File"
   }
 }
