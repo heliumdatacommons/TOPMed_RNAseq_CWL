@@ -23,7 +23,7 @@ Run the pipeline locally with small test input files. Creating these sample inpu
     ```
     ./topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/download_examples.sh
     ```
-4. Use [this](topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) input file or edit the file paths based on your local machine paths. If using the file directly, execute the workflow command in directory with the downloaded files.
+4. Use [this](topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) input file or edit the file paths based on your local machine paths.
 5. Run the workflow with CWLTool.
     ```
     cwltool topmed-workflows/TOPMed_RNAseq_pipeline/rnaseq_pipeline_fastq.cwl \
