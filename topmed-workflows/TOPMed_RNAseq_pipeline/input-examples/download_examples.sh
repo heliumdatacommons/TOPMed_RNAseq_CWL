@@ -21,4 +21,4 @@ cd $DIR"/test-data/"
 
 tar -zxvkf reference-files.tar.gz
 tar -zxvkf rsem_reference.tar.gz
-tar -zxvkf star-index-chr12.tar.gz
+tar -zxvkf star_chr12.tar.gz
