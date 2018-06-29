@@ -58,7 +58,10 @@ inputs:
   rnaseqc_flags:
     type: string[]
   gatk_flags:
-    type: string[]
+    type:
+      type: "null"
+      type: array
+      items: string
 
 outputs:
   - id: star_output_bam
