@@ -20,6 +20,10 @@ label: "TOPMed_RNA-seq"
 
 requirements:
   - class: SubworkflowFeatureRequirement
+  - class: ResourceRequirement
+    coresMin: 4
+    ramMin: 16
+    tmpdirMin: 51200
 
 inputs:
   star_index:
@@ -120,6 +124,11 @@ outputs:
 
 steps:
   run_star:
+    requirements:
+      ResourceRequirement:
+        coresMin: 4
+        ramMin: 16
+        tmpdirMin: 51200
     run: star.cwl
     in:
       star_index: star_index
