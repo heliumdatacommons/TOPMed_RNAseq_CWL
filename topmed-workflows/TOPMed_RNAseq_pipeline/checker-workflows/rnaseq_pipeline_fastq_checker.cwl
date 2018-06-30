@@ -44,7 +44,10 @@ inputs:
   rnaseqc_flags:
     type: string[]
   gatk_flags:
-    type: string[]
+    type:
+      type: "null"
+      type: array
+      items: string
   hash_count_metrics:
     type: string
   hash_chimeric_junctions:
