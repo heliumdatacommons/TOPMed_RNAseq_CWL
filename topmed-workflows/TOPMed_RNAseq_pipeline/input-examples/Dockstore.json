@@ -23,7 +23,6 @@
   "is_stranded": "true",
   "threads": 4,
   "paired_end": "true",
-  "gatk_flags": [],
   "genome_fasta": {
     "path": "../test-data/reference-files/chr12.fa",
     "class": "File"

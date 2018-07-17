@@ -25,7 +25,7 @@ genome_fasta: {
 java_path: /usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/java
 memory: 8
 rnaseqc_flags: ["noDoC", "strictMode"]
-gatk_flags: []
+# gatk_flags: []
 prefix_str: "LC_C13_cRNA"
 threads: 4
 hash_chimeric_junctions: "ad3070bbd5f687a1f66634b68df0312c"

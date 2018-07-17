@@ -43,11 +43,11 @@ inputs:
     type: string
   rnaseqc_flags:
     type: string[]
-  gatk_flags:
-    type:
-      type: "null"
-      type: array
-      items: string
+  # gatk_flags:
+  #   type:
+  #     type: "null"
+  #     type: array
+  #     items: string
   hash_count_metrics:
     type: string
   hash_chimeric_junctions:
@@ -154,7 +154,7 @@ steps:
       genome_fasta: genome_fasta
       java_path: java_path
       rnaseqc_flags: rnaseqc_flags
-      gatk_flags: gatk_flags
+      # gatk_flags: gatk_flags
     out:
       [
         star_output_bam,

@@ -57,11 +57,11 @@ inputs:
     type: string
   rnaseqc_flags:
     type: string[]
-  gatk_flags:
-    type:
-      type: "null"
-      type: array
-      items: string
+  # gatk_flags:
+  #   type:
+  #     type: "null"
+  #     type: array
+  #     items: string
 
 outputs:
   - id: star_output_bam
@@ -197,7 +197,7 @@ steps:
       java_path: java_path
       memory: memory
       rnaseqc_flags: rnaseqc_flags
-      gatk_flags: gatk_flags
+      # gatk_flags: gatk_flags
     out:
       [
         gene_rpkm,

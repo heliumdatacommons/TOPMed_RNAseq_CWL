@@ -59,16 +59,16 @@ inputs:
     inputBinding:
       position: 7
       prefix: --rnaseqc_flags
-  gatk_flags:
-    type:
-      type: "null"
-      type: array
-      items: string
-      inputBinding:
-        itemSeparator: " "
-    inputBinding:
-      position: 8
-      prefix: --gatk_flags
+  # gatk_flags:
+  #   type:
+  #     type: "null"
+  #     type: array
+  #     items: string
+  #     inputBinding:
+  #       itemSeparator: " "
+  #   inputBinding:
+  #     position: 8
+  #     prefix: --gatk_flags
 
 outputs:
   gene_rpkm:
