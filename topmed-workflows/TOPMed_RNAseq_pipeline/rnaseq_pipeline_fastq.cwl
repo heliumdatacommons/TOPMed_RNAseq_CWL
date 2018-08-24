@@ -75,7 +75,7 @@ outputs:
     outputSource: sort_chimeras/output_file
     type: File
   star_output_chimeric_bam_index:
-    outputSource: index_chimeras/bas_index
+    outputSource: index_chimeras/bam_index
     type: File
   star_output_read_counts:
     outputSource: run_star/read_counts

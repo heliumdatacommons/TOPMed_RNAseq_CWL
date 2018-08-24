@@ -73,8 +73,6 @@ inputs:
   #   type: string
   # hash_exon_counts:
   #   type: string
-  hash_count_metrics:
-    type: string
   # hash_count_outputs:
   #   type: string
   checker_star_output_bam:
