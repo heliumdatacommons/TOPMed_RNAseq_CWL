@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     TOPMed RNA-seq CWL workflow. Documentation on the workflow can be found [here](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/README.md).
     Example input files: [Dockstore.json](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) and [rnaseq_pipeline_fastq-example.yml](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/rnaseq_pipeline_fastq-example.yml).
@@ -19,6 +20,7 @@ label: "TOPMed_RNA-seq"
 
 requirements:
   SubworkflowFeatureRequirement: {}
+hints:
   ResourceRequirement:
     coresMin: 4
     ramMin: 16

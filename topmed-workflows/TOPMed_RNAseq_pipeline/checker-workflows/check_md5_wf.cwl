@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     Calculates the MD5 hash of the input file and compares it to the input MD5 hash.
     If hashes match: Exit 0

@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A CWL wrapper for [run_STAR.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_STAR.py)
 

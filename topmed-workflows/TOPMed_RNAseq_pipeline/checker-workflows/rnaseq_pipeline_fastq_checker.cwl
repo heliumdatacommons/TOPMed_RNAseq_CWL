@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A workflow to verify the proper execution of [TOPMed RNA-seq Workflow](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/rnaseq_pipeline_fastq.cwl)
 

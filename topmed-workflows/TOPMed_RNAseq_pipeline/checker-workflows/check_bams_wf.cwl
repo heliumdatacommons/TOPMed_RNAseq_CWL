@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     Compare 2 input BAM files and report results.
     Exit 0 if sucess.

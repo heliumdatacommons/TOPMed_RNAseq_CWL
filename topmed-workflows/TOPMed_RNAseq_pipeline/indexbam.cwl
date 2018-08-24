@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A wrapper for running `samtools index <bam>`.
 
