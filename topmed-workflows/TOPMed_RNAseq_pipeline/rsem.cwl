@@ -7,7 +7,6 @@ doc: |
 
 cwlVersion: v1.0
 class: CommandLineTool
-id: "run-rsem"
 label: "run-rsem"
 baseCommand: /src/run_RSEM.py
 
@@ -50,11 +49,10 @@ inputs:
     inputBinding:
       position: 7
       prefix: --paired_end
-  threads:
-    type: int
-    inputBinding:
-      position: 8
-      prefix: --threads
+
+arguments:
+  - prefix: --threads
+    valueFrom: $(runtime.cores)
 
 outputs:
   gene_results:

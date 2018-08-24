@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A CWL wrapper for [run_MarkDuplicates.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_MarkDuplicates.py)
 
@@ -9,12 +10,12 @@ doc: |
 
 cwlVersion: v1.0
 class: CommandLineTool
-id: "run-MarkDuplicates"
 label: "run-MarkDuplicates"
 baseCommand: ["python3", "-u", "/src/run_MarkDuplicates.py"]
 
 requirements:
-  - class: DockerRequirement
+  InlineJavascriptRequirement: {}
+  DockerRequirement:
     dockerPull: heliumdatacommons/topmed-rnaseq:latest
 
 inputs:
@@ -26,11 +27,10 @@ inputs:
     type: string
     inputBinding:
       position: 2
-  memory:
-    type: int
-    inputBinding:
-      position: 3
-      prefix: --memory
+
+arguments:
+  - prefix: --memory
+    valueFrom: ${runtime.mem / 1024}
 
 outputs:
   bam_file:

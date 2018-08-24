@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A CWL wrapper for [run_rnaseqc.py](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/src/run_rnaseqc.py) duplicated from [run_rnaseqc.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_rnaseqc.py) with minor modifications.
 
@@ -9,12 +10,12 @@ doc: |
 
 cwlVersion: v1.0
 class: CommandLineTool
-id: "run-seqc"
 label: "run-seqc"
 # run_rnaseqc.py is not an executable file in the docker container.
 baseCommand: ["python3", "/src/run_rnaseqc.py"]
 
 requirements:
+  InlineJavascriptRequirement: {}
   DockerRequirement:
     dockerPull: heliumdatacommons/topmed-rnaseq:latest
 
@@ -40,16 +41,6 @@ inputs:
     type: string
     inputBinding:
       position: 4
-  java_path:
-    type: string
-    inputBinding:
-      position: 5
-      prefix: --java
-  memory:
-    type: int
-    inputBinding:
-      position: 6
-      prefix: --memory
   rnaseqc_flags:
     type:
       type: array
@@ -69,6 +60,10 @@ inputs:
   #   inputBinding:
   #     position: 8
   #     prefix: --gatk_flags
+
+arguments:
+  - prefix: --memory
+    valueFrom: ${runtime.ram / 1024}
 
 outputs:
   gene_rpkm:

@@ -15,12 +15,11 @@ doc: |
 
 cwlVersion: v1.0
 class: Workflow
-id: "TOPMed_RNA-seq"
 label: "TOPMed_RNA-seq"
 
 requirements:
-  - class: SubworkflowFeatureRequirement
-  - class: ResourceRequirement
+  SubworkflowFeatureRequirement: {}
+  ResourceRequirement:
     coresMin: 4
     ramMin: 16
     tmpdirMin: 51200
@@ -32,10 +31,6 @@ inputs:
     type: File[]
   prefix_str:
     type: string
-  threads:
-    type: int
-  memory:
-    type: int
   rsem_ref_dir:
     type: Directory
   max_frag_len:
@@ -53,8 +48,6 @@ inputs:
     secondaryFiles:
       - .fai
       - ^.dict
-  java_path:
-    type: string
   rnaseqc_flags:
     type: string[]
   # gatk_flags:
@@ -64,64 +57,64 @@ inputs:
   #     items: string
 
 outputs:
-  - id: star_output_bam
+  star_output_bam:
     outputSource: run_star/bam_file
     type: File
-  - id: star_output_bam_index
+  star_output_bam_index:
     outputSource: run_star/bam_index
     type: File
-  - id: star_output_transcriptome_bam
+  star_output_transcriptome_bam:
     outputSource: run_star/transcriptome_bam
     type: File
-  - id: star_output_chimeric_junctions
+  star_output_chimeric_junctions:
     outputSource: run_star/chimeric_junctions
     type: File
-  - id: star_output_chimeric_bam_file
+  star_output_chimeric_bam_file:
     outputSource: run_star/chimeric_bam_file
     type: File
-  - id: star_output_chimeric_bam_index
+  star_output_chimeric_bam_index:
     outputSource: run_star/chimeric_bam_index
     type: File
-  - id: star_output_read_counts
+  star_output_read_counts:
     outputSource: run_star/read_counts
     type: File
-  - id: star_output_junctions
+  star_output_junctions:
     outputSource: run_star/junctions
     type: File
-  - id: star_output_junctions_pass1
+  star_output_junctions_pass1:
     outputSource: run_star/junctions_pass1
     type: File
-  - id: star_output_logs
+  star_output_logs:
     outputSource: run_star/logs
     type: File[]
-  - id: markduplicates_output_bam
+  markduplicates_output_bam:
     outputSource: run_markduplicates/bam_file
     type: File
-  - id: markduplicates_output_metrics
+  markduplicates_output_metrics:
     outputSource: run_markduplicates/metrics
     type: File
-  - id: markduplicates_bam_index
+  markduplicates_bam_index:
     outputSource: run_index_markduplicates_bam/bam_index
     type: File
-  - id: rsem_output_gene_results
+  rsem_output_gene_results:
     outputSource: run_rsem/gene_results
     type: File
-  - id: rsem_output_isoforms_results
+  rsem_output_isoforms_results:
     outputSource: run_rsem/isoforms_results
     type: File
-  - id: rna-seqc_output_gene_rpkm
+  rna-seqc_output_gene_rpkm:
     outputSource: run_rna-seqc/gene_rpkm
     type: File
-  - id: rna-seqc_output_gene_counts
+  rna-seqc_output_gene_counts:
     outputSource: run_rna-seqc/gene_counts
     type: File
-  - id: rna-seqc_output_exon_counts
+  rna-seqc_output_exon_counts:
     outputSource: run_rna-seqc/exon_counts
     type: File
-  - id: rna-seqc_output_count_metrics
+  rna-seqc_output_count_metrics:
     outputSource: run_rna-seqc/count_metrics
     type: File
-  - id: rna-seqc_output_count_outputs
+  rna-seqc_output_count_outputs:
     outputSource: run_rna-seqc/count_outputs
     type: File
 
@@ -137,7 +130,6 @@ steps:
       star_index: star_index
       fastqs: fastqs
       prefix_str: prefix_str
-      threads: threads
     out:
       [
         bam_file,
@@ -157,7 +149,6 @@ steps:
     in:
       input_bam: run_star/bam_file
       prefix_str: prefix_str
-      memory: memory
     out:
       [
         bam_file,
@@ -180,7 +171,6 @@ steps:
       estimate_rspd: estimate_rspd
       is_stranded: is_stranded
       paired_end: paired_end
-      threads: threads
     out:
       [
         gene_results,
@@ -194,8 +184,6 @@ steps:
       genes_gtf: genes_gtf
       genome_fasta: genome_fasta
       prefix_str: prefix_str
-      java_path: java_path
-      memory: memory
       rnaseqc_flags: rnaseqc_flags
       # gatk_flags: gatk_flags
     out:
