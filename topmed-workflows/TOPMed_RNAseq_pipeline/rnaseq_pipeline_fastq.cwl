@@ -60,9 +60,9 @@ outputs:
   star_output_bam:
     outputSource: sort_bam/output_file
     type: File
-  # star_output_bam_index:
-  #   outputSource: run_star/bam_index
-  #   type: File
+  star_output_bam_index:
+    outputSource: index_bam/bam_index
+    type: File
   star_output_transcriptome_bam:
     outputSource: run_star/transcriptome_bam
     type: File
@@ -72,9 +72,9 @@ outputs:
   star_output_chimeric_bam_file:
     outputSource: sort_chimeras/output_file
     type: File
-  # star_output_chimeric_bam_index:
-  #   outputSource: run_star/chimeric_bam_index
-  #   type: File
+  star_output_chimeric_bam_index:
+    outputSource: index_chimeras/bas_index
+    type: File
   star_output_read_counts:
     outputSource: run_star/read_counts
     type: File
@@ -169,6 +169,18 @@ steps:
         source: prefix_str
         valueFrom: $(self).Chimeric.out.sorted.bam
     out: [ output_file ]
+
+  index_bam:
+    run: indexbam.cwl
+    in:
+      input_bam: sort_bam/output_file
+    out: [bam_index]
+
+  index_chimeras:
+    run: indexbam.cwl
+    in:
+      input_bam: sort_chimeras/output_file
+    out: [bam_index]
 
   run_markduplicates:
     run: markduplicates.cwl
