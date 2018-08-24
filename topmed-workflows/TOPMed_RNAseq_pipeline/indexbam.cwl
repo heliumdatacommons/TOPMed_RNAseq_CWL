@@ -8,7 +8,7 @@ baseCommand: [ samtools, index ]
 
 requirements:
   DockerRequirement:
-    dockerPull: heliumdatacommons/topmed-rnaseq:latest
+    dockerPull: quay.io/biocontainers/samtools:1.8--4
   InitialWorkDirRequirement:
     listing:
       - $(inputs.input_bam)
