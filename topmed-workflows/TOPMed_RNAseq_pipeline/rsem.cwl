@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A CWL wrapper for [run_RSEM.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_RSEM.py)
 
@@ -8,58 +9,55 @@ doc: |
 cwlVersion: v1.0
 class: CommandLineTool
 label: "run-rsem"
-baseCommand: /src/run_RSEM.py
+baseCommand: rsem-calculate-expression
 
-requirements:
+hints:
   DockerRequirement:
-    dockerPull: heliumdatacommons/topmed-rnaseq:latest
+    dockerPull: quay.io/biocontainers/rsem:1.3.0--boost1.64_3
 
 inputs:
   rsem_ref_dir:
     type: Directory
-    default:
-      type: Directory
     inputBinding:
       position: 1
+      valueFrom: $(self.path)/rsem_reference
   transcriptome_bam:
     type: File
     inputBinding:
-      position: 2
+      prefix: --bam
   prefix_str:
     type: string
-    inputBinding:
-      position: 3
   max_frag_len:
     type: int
     inputBinding:
-      position: 4
-      prefix: --max_frag_len
+      prefix: --fragment-length-max
   estimate_rspd:
-    type: string
+    type: boolean
     inputBinding:
-      position: 5
-      prefix: --estimate_rspd
+      prefix: --estimate-rspd
   is_stranded:
-    type: string
+    type: boolean
     inputBinding:
-      position: 6
-      prefix: --is_stranded
+      prefix: "--forward-prob 0.0"
   paired_end:
-    type: string
+    type: boolean
     inputBinding:
-      position: 7
-      prefix: --paired_end
+      prefix: --paired-end
 
 arguments:
-  - prefix: --threads
+  - prefix: --num-threads
     valueFrom: $(runtime.cores)
+  - prefix: --fragment-length-max
+    valueFrom: "1000"
+  - --no-bam-output
+  - $(inputs.prefix_str).rsem
 
 outputs:
   gene_results:
     type: File
     outputBinding:
-      glob: "*.rsem.genes.results"
+      glob: $(inputs.prefix_str).rsem.genes.results
   isoforms_results:
     type: File
     outputBinding:
-      glob: "*.rsem.isoforms.results"
+      glob: $(inputs.prefix_str).rsem.isoforms.results
