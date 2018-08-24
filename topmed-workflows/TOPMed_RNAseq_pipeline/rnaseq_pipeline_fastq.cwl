@@ -58,11 +58,11 @@ inputs:
 
 outputs:
   star_output_bam:
-    outputSource: run_star/bam_file
+    outputSource: sort_bam/output_file
     type: File
-  star_output_bam_index:
-    outputSource: run_star/bam_index
-    type: File
+  # star_output_bam_index:
+  #   outputSource: run_star/bam_index
+  #   type: File
   star_output_transcriptome_bam:
     outputSource: run_star/transcriptome_bam
     type: File
@@ -70,11 +70,11 @@ outputs:
     outputSource: run_star/chimeric_junctions
     type: File
   star_output_chimeric_bam_file:
-    outputSource: run_star/chimeric_bam_file
+    outputSource: sort_chimeras/output_file
     type: File
-  star_output_chimeric_bam_index:
-    outputSource: run_star/chimeric_bam_index
-    type: File
+  # star_output_chimeric_bam_index:
+  #   outputSource: run_star/chimeric_bam_index
+  #   type: File
   star_output_read_counts:
     outputSource: run_star/read_counts
     type: File
@@ -129,25 +129,51 @@ steps:
     in:
       star_index: star_index
       fastqs: fastqs
-      prefix_str: prefix_str
+      prefix: prefix_str
     out:
       [
-        bam_file,
-        bam_index,
+        bam,
         transcriptome_bam,
         chimeric_junctions,
-        chimeric_bam_file,
-        chimeric_bam_index,
+        chimeric_bam,
         read_counts,
         junctions,
         junctions_pass1,
         logs
       ]
 
+  sort_bam:
+    run: https://dockstore.org:8443/api/ga4gh/v2/tools/quay.io%2Fcancercollaboratory%2Fdockstore-tool-samtools-sort/versions/1.0/plain-CWL/descriptor/%2FDockstore.cwl
+    in:
+      threads:
+        valueFrom: $(runtime.cores)
+      memory:
+        valueFrom: $(runtime.ram)M
+      input:
+        source: run_star/bam
+      output_name:
+        source: prefix_str
+        valueFrom: $(self).Aligned.sortedByCoord.out.bam
+    out: [ output_file ]
+
+  sort_chimeras:
+    run: https://dockstore.org:8443/api/ga4gh/v2/tools/quay.io%2Fcancercollaboratory%2Fdockstore-tool-samtools-sort/versions/1.0/plain-CWL/descriptor/%2FDockstore.cwl
+    in:
+      threads:
+        valueFrom: $(runtime.cores)
+      memory:
+        valueFrom: $(runtime.ram)M
+      input:
+        source: run_star/chimeric_bam
+      output_name:
+        source: prefix_str
+        valueFrom: $(self).Chimeric.out.sorted.bam
+    out: [ output_file ]
+
   run_markduplicates:
     run: markduplicates.cwl
     in:
-      input_bam: run_star/bam_file
+      input_bam: sort_bam/output_file
       prefix_str: prefix_str
     out:
       [
