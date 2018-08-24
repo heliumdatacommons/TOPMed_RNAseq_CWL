@@ -11,33 +11,36 @@ doc: |
 cwlVersion: v1.0
 class: CommandLineTool
 label: "run-MarkDuplicates"
-baseCommand: ["python3", "-u", "/src/run_MarkDuplicates.py"]
+baseCommand: [java, picard.cmdline.PicardCommandLine]
 
-requirements:
-  InlineJavascriptRequirement: {}
+hints:
   DockerRequirement:
-    dockerPull: heliumdatacommons/topmed-rnaseq:latest
+    dockerPull: quay.io/biocontainers/picard:2.9.2--2
 
 inputs:
   input_bam:
     type: File
-    inputBinding:
-      position: 1
   prefix_str:
     type: string
-    inputBinding:
-      position: 2
 
 arguments:
-  - prefix: --memory
-    valueFrom: ${runtime.mem / 1024}
+  - prefix: -Xmx
+    valueFrom: $(runtime.ram)M
+  - picard.cmdline.PicardCommandLine
+  - MarkFuplicates
+  - I=$(inputs.input_bam.path)
+  - O=$(runtime.outdir)/$(inputs.input_bam.nameroot).md.bam
+  - M=$(runtime.outdir)/$(inputs.prefix_str).marked_dup_metrics.txt
+  - ASSUME_SORT_ORDER=coordinate
+  - OPTICAL_DUPLICATE_PIXEL_DISTANCE=100
 
 outputs:
   bam_file:
     type: File
     outputBinding:
-      glob: "*.md.bam"
+      glob: $(runtime.outdir)/$(inputs.input_bam.nameroot).md.bam
   metrics:
     type: File
     outputBinding:
-      glob: "*.marked_dup_metrics.txt"
+      glob: $(runtime.outdir)/$(inputs.prefix_str).marked_dup_metrics.txt
+
