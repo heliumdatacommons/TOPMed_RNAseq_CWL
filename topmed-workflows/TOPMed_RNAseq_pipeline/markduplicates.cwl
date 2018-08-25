@@ -11,9 +11,13 @@ doc: |
 cwlVersion: v1.0
 class: CommandLineTool
 label: "run-MarkDuplicates"
-baseCommand: [java, picard.cmdline.PicardCommandLine]
+baseCommand: [java]
 
-hints:
+requirements: # turn back into a hint when the biocontainer has its classpath
+              #   updated
+  EnvVarRequirement:
+    envDef:
+      CLASSPATH: /usr/local/share/picard-2.9.2-2/picard.jar
   DockerRequirement:
     dockerPull: quay.io/biocontainers/picard:2.9.2--2
 
@@ -26,8 +30,9 @@ inputs:
 arguments:
   - prefix: -Xmx
     valueFrom: $(runtime.ram)M
+    separate: false
   - picard.cmdline.PicardCommandLine
-  - MarkFuplicates
+  - MarkDuplicates
   - I=$(inputs.input_bam.path)
   - O=$(runtime.outdir)/$(inputs.input_bam.nameroot).md.bam
   - M=$(runtime.outdir)/$(inputs.prefix_str).marked_dup_metrics.txt
@@ -38,9 +43,9 @@ outputs:
   bam_file:
     type: File
     outputBinding:
-      glob: $(runtime.outdir)/$(inputs.input_bam.nameroot).md.bam
+      glob: $(inputs.input_bam.nameroot).md.bam
   metrics:
     type: File
     outputBinding:
-      glob: $(runtime.outdir)/$(inputs.prefix_str).marked_dup_metrics.txt
+      glob: $(inputs.prefix_str).marked_dup_metrics.txt
 
