@@ -38,11 +38,11 @@ inputs:
   max_frag_len:
     type: int
   estimate_rspd:
-    type: string
+    type: boolean
   is_stranded:
-    type: string
+    type: boolean
   paired_end:
-    type: string
+    type: boolean
   genes_gtf:
     type: File
   genome_fasta:
@@ -122,11 +122,6 @@ outputs:
 
 steps:
   run_star:
-    requirements:
-      ResourceRequirement:
-        coresMin: 4
-        ramMin: 16
-        tmpdirMin: 51200
     run: star.cwl
     in:
       star_index: star_index

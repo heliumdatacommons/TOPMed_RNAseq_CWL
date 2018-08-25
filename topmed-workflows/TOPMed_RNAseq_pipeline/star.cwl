@@ -15,7 +15,23 @@ baseCommand: STAR
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/biocontainers/star:2.5.3a--0
+    #dockerPull: quay.io/biocontainers/star:2.5.3a--0
+    dockerFile: |
+      FROM biocontainers/biocontainers:debian-stretch-backports
+      MAINTAINER biocontainers <biodocker@gmail.com>
+      LABEL    software="rna-star" \
+          container="rna-star" \
+          about.summary="ultrafast universal RNA-seq aligner" \
+          about.home="https://github.com/alexdobin/STAR/" \
+          software.version="2.6.1adfsg-1-deb" \
+          version="1" \
+          about.copyright="2009-2015 Alexander Dobin <dobin@cshl.edu>" \
+          about.license="GPL-3+" \
+          about.license_file="/usr/share/doc/rna-star/copyright" \
+          extra.binaries="/usr/bin/STAR" \
+          about.tags="biology::nucleic-acids, field::biology, field::biology:bioinformatics,:c++, role::program, use::analysing,:biological-sequence"
+      ENV DEBIAN_FRONTEND noninteractive
+      RUN apt-get update && apt-get install -y rna-star && apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
 
 inputs:
   star_index:
@@ -57,8 +73,6 @@ arguments:
     valueFrom: "20"
   - prefix: --alignIntronMax
     valueFrom: "1000000"
-  - prefix: --outFilterMismatchNoverLmax
-    valueFrom: "0.1"
   - prefix: --alignMatesGapMax
     valueFrom: "1000000"
   - prefix: --outFilterType
@@ -77,10 +91,12 @@ arguments:
     valueFrom: None
   - prefix: --alignSoftClipAtReferenceEnds
     valueFrom: Yes
-  - prefix: --quantMode
-    valueFrom: "TranscriptomeSAM GeneCounts"
-  - prefix: --outSAMtype
-    valueFrom: "BAM Unsorted"
+  - --quantMode
+  - TranscriptomeSAM
+  - GeneCounts
+  - --outSAMtype
+  - BAM
+  - Unsorted
   - prefix: --outSAMunmapped
     valueFrom: Within
   - prefix: --genomeLoad
@@ -89,14 +105,21 @@ arguments:
     valueFrom: "15"
   - prefix: --chimJunctionOverhangMin
     valueFrom: "15"
-  - prefix: --chimOutType
-    valueFrom: "WithinBAM SoftClip"
+  - --chimOutType
+  - WithinBAM
+  - SoftClip
   - prefix: --chimMainSegmentMultNmax
     valueFrom: "1"
-  - prefix: --outSAMattributes
-    valueFrom: "NH HI AS nM NM ch"
-  - prefix: --outSAMattrRGline
-    valueFrom: "ID:rg1 SM:sm1"
+  - --outSAMattributes
+  - NH
+  - HI
+  - AS
+  - nM
+  - NM
+  - ch
+  - --outSAMattrRGline
+  - ID:rg1
+  - SM:sm1
 
 
 outputs:
