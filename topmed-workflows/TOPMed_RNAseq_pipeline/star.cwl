@@ -17,13 +17,13 @@ hints:
   DockerRequirement:
     #dockerPull: quay.io/biocontainers/star:2.5.3a--0
     dockerFile: |
-      FROM biocontainers/biocontainers:debian-stretch-backports
+      FROM debian:buster-slim
       MAINTAINER biocontainers <biodocker@gmail.com>
       LABEL    software="rna-star" \
           container="rna-star" \
           about.summary="ultrafast universal RNA-seq aligner" \
           about.home="https://github.com/alexdobin/STAR/" \
-          software.version="2.6.1adfsg-1-deb" \
+          software.version="2.5.3adfsg-1-deb" \
           version="1" \
           about.copyright="2009-2015 Alexander Dobin <dobin@cshl.edu>" \
           about.license="GPL-3+" \
@@ -31,7 +31,15 @@ hints:
           extra.binaries="/usr/bin/STAR" \
           about.tags="biology::nucleic-acids, field::biology, field::biology:bioinformatics,:c++, role::program, use::analysing,:biological-sequence"
       ENV DEBIAN_FRONTEND noninteractive
-      RUN apt-get update && apt-get install -y rna-star && apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
+      RUN echo \
+        'deb http://snapshot.debian.org/archive/debian/20170906/ buster  main' > /etc/apt/sources.list \
+        && printf "Package: r-*\nPin: origin snapshot.debian.org\nPin-Priority: 990\n" > /etc/apt/preferences.d/snapshot \
+        && apt-get -o Acquire::Check-Valid-Until=false update \
+        && apt-get upgrade -y \
+        && apt-get install -y --no-install-recommends \
+            --allow-unauthenticated rna-star=2.5.3a+dfsg-3 \
+        && apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
+    dockerImageId: star
 
 inputs:
   star_index:
@@ -127,14 +135,6 @@ outputs:
     type: File
     outputBinding:
       glob: $(inputs.prefix).Aligned.out.bam
-  # bam_file:
-  #   type: File
-  #   outputBinding:
-  #     glob: "*.Aligned.sortedByCoord.out.bam"
-  # bam_index:
-  #   type: File
-  #   outputBinding:
-  #     glob: "*.Aligned.sortedByCoord.out.bam.bai"
   transcriptome_bam:
     type: File
     outputBinding:
