@@ -20,11 +20,12 @@ label: "TOPMed_RNA-seq"
 
 requirements:
   SubworkflowFeatureRequirement: {}
-hints:
-  ResourceRequirement:
-    coresMin: 4
-    ramMin: 16
-    tmpdirMin: 51200
+  StepInputExpressionRequirement: {}
+# hints:
+#   ResourceRequirement:
+#     coresMin: 4
+#     ramMin: 16
+#     #tmpdirMin: 51200
 
 inputs:
   star_index:
@@ -140,12 +141,8 @@ steps:
       ]
 
   sort_bam:
-    run: https://dockstore.org:8443/api/ga4gh/v2/tools/quay.io%2Fcancercollaboratory%2Fdockstore-tool-samtools-sort/versions/1.0/plain-CWL/descriptor/%2FDockstore.cwl
+    run: samtools-sort.cwl
     in:
-      threads:
-        valueFrom: $(runtime.cores)
-      memory:
-        valueFrom: $(runtime.ram)M
       input:
         source: run_star/bam
       output_name:
@@ -154,12 +151,8 @@ steps:
     out: [ output_file ]
 
   sort_chimeras:
-    run: https://dockstore.org:8443/api/ga4gh/v2/tools/quay.io%2Fcancercollaboratory%2Fdockstore-tool-samtools-sort/versions/1.0/plain-CWL/descriptor/%2FDockstore.cwl
+    run: samtools-sort.cwl
     in:
-      threads:
-        valueFrom: $(runtime.cores)
-      memory:
-        valueFrom: $(runtime.ram)M
       input:
         source: run_star/chimeric_bam
       output_name:
@@ -231,7 +224,7 @@ steps:
       ]
 
 $namespaces:
-  s: https://schema.org/
+  s: http://schema.org/
 
 $schemas:
 - http://dublincore.org/2012/06/14/dcterms.rdf
