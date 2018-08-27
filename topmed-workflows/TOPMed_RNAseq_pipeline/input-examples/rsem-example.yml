@@ -1,6 +1,6 @@
 rsem_ref_dir:
     class: Directory
-    location: ../test-data/rsem_reference
+    location: /rsem_ref/
 transcriptome_bam: {
     class: File,
     path: LC_C13_cRNA.Aligned.toTranscriptome.out.bam

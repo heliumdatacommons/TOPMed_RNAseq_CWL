@@ -63,8 +63,9 @@ inputs:
 
 arguments:
   - prefix: --memory
-    valueFrom: ${runtime.ram / 1024}
-
+    valueFrom: $(runtime.ram / 1024)
+  - prefix: --java
+    valueFrom: /usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/java
 outputs:
   gene_rpkm:
     type: File
