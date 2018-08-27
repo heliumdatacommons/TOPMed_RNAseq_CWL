@@ -21,20 +21,16 @@ inputs:
     type: File[]
   prefix_str:
     type: string
-  threads:
-    type: int
-  memory:
-    type: int
   rsem_ref_dir_tar:
     type: File
   max_frag_len:
     type: int
   estimate_rspd:
-    type: string
+    type: boolean
   is_stranded:
-    type: string
+    type: boolean
   paired_end:
-    type: string
+    type: boolean
   genes_gtf:
     type: File
   genome_fasta:
@@ -42,8 +38,6 @@ inputs:
     secondaryFiles:
       - .fai
       - ^.dict
-  java_path:
-    type: string
   rnaseqc_flags:
     type: string[]
   # gatk_flags:
@@ -156,8 +150,6 @@ steps:
       star_index: untar_star_index/untarred_dir
       fastqs: fastqs
       prefix_str: prefix_str
-      threads: threads
-      memory: memory
       rsem_ref_dir: untar_rsem_reference/untarred_dir
       max_frag_len: max_frag_len
       estimate_rspd: estimate_rspd
@@ -165,7 +157,6 @@ steps:
       paired_end: paired_end
       genes_gtf: genes_gtf
       genome_fasta: genome_fasta
-      java_path: java_path
       rnaseqc_flags: rnaseqc_flags
       # gatk_flags: gatk_flags
     out:
@@ -309,7 +300,7 @@ steps:
   #   out: [out_hash_string]
 
 $namespaces:
-  s: https://schema.org/
+  s: http://schema.org/
 
 $schemas:
 - http://dublincore.org/2012/06/14/dcterms.rdf

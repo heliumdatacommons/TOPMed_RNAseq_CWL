@@ -27,10 +27,7 @@ inputs:
     type: int?
     inputBinding:
       prefix: -l
-    doc: |
-      Set compression level, from 0 (uncompressed) to 9 (best)
-
-    doc: Set number of sorting and compression threads [1]
+    doc: Set compression level, from 0 (uncompressed) to 9 (best)
   input:
     type: File
     inputBinding:
