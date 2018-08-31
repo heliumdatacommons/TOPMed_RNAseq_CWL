@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     Calculate the MD5 hash for the input file.
 

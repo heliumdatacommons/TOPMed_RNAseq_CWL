@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     Extract all files from archive.tar and filter through gzip
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     Compare 2 input BAM files using [BamUtil diff](https://genome.sph.umich.edu/wiki/BamUtil:_diff)
 

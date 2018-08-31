@@ -1,3 +1,4 @@
+#!/usr/bin/env cwl-runner
 doc: |
     A CWL wrapper for [run_RSEM.py](https://github.com/broadinstitute/gtex-pipeline/blob/master/rnaseq/src/run_RSEM.py)
 
@@ -7,61 +8,64 @@ doc: |
 
 cwlVersion: v1.0
 class: CommandLineTool
-id: "run-rsem"
 label: "run-rsem"
-baseCommand: /src/run_RSEM.py
+baseCommand: rsem-calculate-expression
 
 requirements:
+  InlineJavascriptRequirement: {}
+  InitialWorkDirRequirement:
+    listing:
+      - entry: $(inputs.rsem_ref_dir)
+        writable: true
+hints:
   DockerRequirement:
-    dockerPull: heliumdatacommons/topmed-rnaseq:latest
+    dockerPull: quay.io/biocontainers/rsem:1.3.0--boost1.64_3
 
 inputs:
   rsem_ref_dir:
     type: Directory
-    default:
-      type: Directory
     inputBinding:
-      position: 1
+      position: 2
+      valueFrom: $(self.basename)/rsem_reference
   transcriptome_bam:
     type: File
     inputBinding:
-      position: 2
+      position: 1
   prefix_str:
     type: string
     inputBinding:
       position: 3
+      valueFrom: $(self).rsem
   max_frag_len:
     type: int
     inputBinding:
-      position: 4
-      prefix: --max_frag_len
+      prefix: --fragment-length-max
   estimate_rspd:
-    type: string
+    type: boolean
     inputBinding:
-      position: 5
-      prefix: --estimate_rspd
+      prefix: --estimate-rspd
   is_stranded:
-    type: string
-    inputBinding:
-      position: 6
-      prefix: --is_stranded
+    type: boolean
   paired_end:
-    type: string
+    type: boolean
     inputBinding:
-      position: 7
-      prefix: --paired_end
-  threads:
-    type: int
-    inputBinding:
-      position: 8
-      prefix: --threads
+      prefix: --paired-end
+
+arguments:
+  - prefix: --num-threads
+    valueFrom: $(runtime.cores)
+  - prefix: --fragment-length-max
+    valueFrom: "1000"
+  - --no-bam-output
+  - --bam
+  - ${if (inputs.is_stranded) { return ["--forward-prob", "0.0"];} }
 
 outputs:
   gene_results:
     type: File
     outputBinding:
-      glob: "*.rsem.genes.results"
+      glob: $(inputs.prefix_str).rsem.genes.results
   isoforms_results:
     type: File
     outputBinding:
-      glob: "*.rsem.isoforms.results"
+      glob: $(inputs.prefix_str).rsem.isoforms.results
