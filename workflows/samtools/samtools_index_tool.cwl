@@ -13,6 +13,9 @@ requirements:
   InitialWorkDirRequirement:
     listing:
       - $(inputs.input_bam)
+  ResourceRequirement:
+    ramMin: 7500
+    coresMin: 2
 
 inputs:
   input_bam:
