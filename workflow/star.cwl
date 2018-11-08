@@ -6,8 +6,6 @@ doc: |
 
     This CWL Tool was developed as step 1 of the TOPMed RNA-seq workflow.
 
-    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
-
 cwlVersion: v1.0
 class: CommandLineTool
 label: "run-star"

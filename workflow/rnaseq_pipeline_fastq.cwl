@@ -1,11 +1,11 @@
 #!/usr/bin/env cwl-runner
 doc: |
-    TOPMed RNA-seq CWL workflow. Documentation on the workflow can be found [here](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/README.md).
-    Example input files: [Dockstore.json](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/Dockstore.json) and [rnaseq_pipeline_fastq-example.yml](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/input-examples/rnaseq_pipeline_fastq-example.yml).
+    TOPMed RNA-seq CWL workflow. Documentation on the workflow can be found [here](https://github.com/heliumdatacommons/TOPMed_RNAseq_CWL/blob/master/README.md).
+    Example input files: [Dockstore.json](https://github.com/heliumdatacommons/TOPMed_RNAseq_CWL/blob/master/workflow/input-examples/Dockstore.json) and [rnaseq_pipeline_fastq-example.yml](https://github.com/heliumdatacommons/TOPMed_RNAseq_CWL/blob/master/workflow/input-examples/rnaseq_pipeline_fastq-example.yml).
 
-    Quickstart instructions are [here](https://github.com/heliumdatacommons/cwl_workflows/blob/master/topmed-workflows/TOPMed_RNAseq_pipeline/README.md#Quick Start).
+    Quickstart instructions are [here](https://github.com/heliumdatacommons/TOPMed_RNAseq_CWL/README.md#Quick Start).
 
-    [GitHub Repo](https://github.com/heliumdatacommons/cwl_workflows)
+    [GitHub Repo](https://github.com/heliumdatacommons/TOPMed_RNAseq_CWL)
 
     Pipeline steps:
     1. Align RNA-seq reads with [STAR v2.5.3a](https://github.com/alexdobin/STAR).
