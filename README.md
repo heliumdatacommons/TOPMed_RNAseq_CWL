@@ -1,5 +1,9 @@
 # TOPMed RNA-seq pipeline
 
+The [TOPMed RNA-Seq pipeline](https://github.com/broadinstitute/gtex-pipeline/blob/b65c22beb1967f991384a62bf3a6f63b35c0a387/TOPMed_RNAseq_pipeline.md) was converted to CWL for a deliverable to have a CWL pipeline available through a public [Tool Registry Service](https://github.com/ga4gh/tool-registry-service-schemas). Specifically, this workflow is available through [Dockstore.org](https://dockstore.org/).
+
+## Workflow description
+
 This document describes team Helium's implimentation of the TOPMed RNA-seq pipeline as described in commit [b65c22b](https://github.com/broadinstitute/gtex-pipeline/blob/b65c22beb1967f991384a62bf3a6f63b35c0a387/TOPMed_RNAseq_pipeline.md). The CWL Workflow is registered publicly on Dockstore [here](https://dockstore.org/workflows/github.com/heliumdatacommons/cwl_workflows/TOPMed_RNAseq_pipeline). This CWL workflow has 4 components described below.
 
 A checker workflow registered on Dockstore is also available to verify operation of this pipeline. See information [here](/topmed-workflows/TOPMed_RNAseq_pipeline/checker-workflows/README.md).
